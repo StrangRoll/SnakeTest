@@ -1,14 +1,16 @@
+using AYellowpaper;
+using Sources.Snake_mechanics.Interfaces;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace Sources.Snake_mechanics.Input
 {
-    public class PlayerInputRoot : MonoBehaviour
+    public class PlayerInputRoot : MonoBehaviour, IInputRoot
     {
         private PlayerInput _playerInput;
 
-        public event UnityAction<Vector2> DirectionChanged; 
-
+        public event UnityAction<Vector2> DirectionChanged;
+        
         private void OnEnable()
         {
             _playerInput = new PlayerInput();
