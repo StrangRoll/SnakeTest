@@ -1,7 +1,6 @@
 using AYellowpaper;
 using Sources.Snake_mechanics.Interfaces;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Sources.Snake_mechanics.Move
 {
