@@ -22,6 +22,15 @@ namespace Sources.Snake_mechanics.Move
 
         private void FixedUpdate()
         {
+            if (CheckRaycastForTerrain(out var hit) == false)
+            {
+                Debug.LogError("No ground detected");
+                return;
+            }
+
+            Rotate(hit);
+            MoveToDesiredHeight(hit);
+            
             Move();
         }
 
@@ -37,16 +46,8 @@ namespace Sources.Snake_mechanics.Move
 
         public void Move()
         {
-            if (CheckRaycastForTerrain(out var hit) == false)
-            {
-                Debug.LogError("No ground detected");
-                return;
-            }
-
-            Rotate(hit);
-            MoveToDesiredHeight(hit);
-            
-            transform.Translate(_direction * (Time.deltaTime * _speed));
+            var movement = new Vector3(_direction.x, 0.0f, _direction.y) * (_speed * Time.deltaTime);
+            transform.Translate(movement);
         }
 
         private bool CheckRaycastForTerrain(out RaycastHit hit)
