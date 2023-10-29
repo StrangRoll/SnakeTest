@@ -42,8 +42,6 @@ namespace Sources.Snake_mechanics.Tail
 
         private IEnumerator CreateNewSegment(TailSegmentsStorage storage)
         {
-            storage.RememberLastSegmentPosition();
-            
             yield return _waitBeforeCreateNewTailSegment;
 
             var newSegment = NightPool.Spawn(_tailSegmentPrefab, transform);

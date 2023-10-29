@@ -30,7 +30,7 @@ namespace Sources.Snake_mechanics.Input
         private void OnMove()
         {
             var newDirection = _playerInput.Player.Move.ReadValue<Vector2>();
-            DirectionChanged?.Invoke(newDirection);
+            DirectionChanged?.Invoke(newDirection.normalized);
         }
     }
 }
