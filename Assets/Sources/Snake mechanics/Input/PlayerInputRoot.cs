@@ -19,7 +19,7 @@ namespace Sources.Snake_mechanics.Input
         private void Start()
         {
             _playerInput.Player.Move.performed += ctx => OnMove();
-            _playerInput.Player.Move.canceled += ctx => OnMove();
+            DirectionChanged?.Invoke(Vector2.right);
         }
 
         private void OnDisable()
