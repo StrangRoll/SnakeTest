@@ -1,6 +1,7 @@
 using AYellowpaper;
 using Sources.Snake_mechanics.Interfaces;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Sources.Snake_mechanics.Move
 {
@@ -8,6 +9,7 @@ namespace Sources.Snake_mechanics.Move
     {
         private const string GroundLayer = "Ground";
         
+        [SerializeField] private SnakeHeadRotator _snakeHeadRotator;
         [SerializeField] private InterfaceReference<IInputRoot> _inputRoot;
         [SerializeField] private float _speed;
         [SerializeField] private float _desiredHeight;
@@ -28,7 +30,7 @@ namespace Sources.Snake_mechanics.Move
                 return;
             }
 
-            Rotate(hit);
+            RotateByNormal(hit);
             MoveToDesiredHeight(hit);
             
             Move();
@@ -48,6 +50,7 @@ namespace Sources.Snake_mechanics.Move
         {
             var movement = new Vector3(_direction.x, 0.0f, _direction.y) * (_speed * Time.deltaTime);
             transform.Translate(movement);
+            _snakeHeadRotator.RotateInDirection(movement);
         }
 
         private bool CheckRaycastForTerrain(out RaycastHit hit)
@@ -73,7 +76,7 @@ namespace Sources.Snake_mechanics.Move
             transform.position = newPosition;
         }
 
-        private void Rotate(RaycastHit hit)
+        private void RotateByNormal(RaycastHit hit)
         {
             transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
         }
