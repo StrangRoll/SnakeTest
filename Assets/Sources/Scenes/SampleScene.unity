@@ -1133,6 +1133,7 @@ MonoBehaviour:
   _applePrefab: {fileID: 5243405894145156979, guid: d987980e41c341c4998933a6851ee253, type: 3}
   _planetTransform: {fileID: 1176040156}
   _maxRadius: 30
+  _startAppleCount: 100
 --- !u!1 &1903627135
 GameObject:
   m_ObjectHideFlags: 0
