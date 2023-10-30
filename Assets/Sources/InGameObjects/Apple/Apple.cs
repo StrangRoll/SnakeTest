@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Sources.InGameObjects
+namespace Sources.InGameObjects.Apple
 {
     public class Apple : MonoBehaviour
     {

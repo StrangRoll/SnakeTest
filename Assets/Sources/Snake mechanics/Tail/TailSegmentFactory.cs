@@ -1,6 +1,7 @@
 using System.Collections;
 using NTC.Pool;
 using Sources.InGameObjects;
+using Sources.InGameObjects.Apple;
 using UnityEngine;
 
 namespace Sources.Snake_mechanics.Tail
