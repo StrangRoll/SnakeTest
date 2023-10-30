@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using NTC.Pool;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -12,21 +14,37 @@ namespace Sources.InGameObjects.Apple
         [SerializeField] private Transform _planetTransform;
         [SerializeField] private float _maxRadius;
         [SerializeField] private int _startAppleCount;
+        
+        private List<Apple> _allApples = new List<Apple>();
 
         private void Start()
         {
             for (var i = 0; i < _startAppleCount; i++)
             {
-                SpawnNewApple();
+                var newApple = SpawnNewApple();
+                _allApples.Add(newApple);
+                newApple.AppleDespawned += OnAppleDespawned;
             }
         }
 
-        private void SpawnNewApple()
+        private void OnDestroy()
+        {
+            foreach (var apple in _allApples)
+                apple.AppleDespawned -= OnAppleDespawned;
+        }
+
+        private void OnAppleDespawned(Apple apple)
+        {
+            SpawnNewApple();
+        }
+
+        private Apple SpawnNewApple()
         {
             Vector3 surfaceNormal;   
             var randomPosition = RandomPositionOnSurface(out surfaceNormal);
             var newApple = NightPool.Spawn(_applePrefab, randomPosition, Quaternion.identity);
             newApple.Init(surfaceNormal);
+            return newApple;
         }
         
         private Vector3 RandomPositionOnSurface(out Vector3 surfaceNormal)
@@ -46,6 +64,5 @@ namespace Sources.InGameObjects.Apple
             Debug.LogError("AppleFactory not find ground!");
             return _planetTransform.position;
         }
-
     }
 }
